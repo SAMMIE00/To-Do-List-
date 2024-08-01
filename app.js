@@ -1,14 +1,26 @@
-const inputBox = document.getElementByID("inputBox");
-const listcontainer = document.getElementByID("list-container");
+const inputBox = document.getElementById("input-box");
+const listcontainer = document.getElementById("list-container");
 function addTask(){
     if(inputBox.value === ''){
         alert("you must write something!");
 
     }
     else{
-        let li=document.createElement("li");
+        let li = document.createElement("li");
         li.innerHTML = inputBox.value;
-        listcontainer.appendchild(li);
+        listcontainer.appendChild(li);
+        let span = document.createElement("span");
+        span.innerHTML= "\u00d7";
+        li.appendChild(span)
     }
     inputBox.value="";
 }
+
+listcontainer.addEventListener("click", function(e){
+    if(e.target.tagName === "LI"){
+        e.target.classList.toggle("checked");
+    }
+    else if(e.target.tagName === "SPAN"){
+        e.target.parentElement.remove();
+    }
+}, false);
